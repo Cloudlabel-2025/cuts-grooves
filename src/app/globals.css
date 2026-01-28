@@ -1,42 +1,611 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ════════════════════════════════════════════════════════════════
+     ROYAL LIGHT THEME ("The Artisan's Atelier")
+     A bright, sophisticated palette for Cuts & Grooves
+  ════════════════════════════════════════════════════════════════ */
+
+  /* ---- Royal Light Palette ---- */
+  --royal-white: #faf9f6;
+  /* Off-white background */
+  --royal-cream: #f4f1ea;
+  /* Secondary background */
+  --royal-pearl: #e8e4da;
+  /* Borders / Subtle elements */
+
+  --royal-gold: #c5a065;
+  /* Primary Accent (Muted Gold) */
+  --royal-gold-dark: #a6844d;
+  /* Darker Gold for hover */
+  --royal-bronze: #8c735a;
+  /* Text accent */
+
+  --royal-ink: #2b2926;
+  /* Primary Text (Soft Black) */
+  --royal-slate: #5e5b56;
+  /* Secondary Text */
+
+  /* ---- Mapped Variables (for compatibility) ---- */
+  --warm-white: var(--royal-white);
+  --ivory: var(--royal-cream);
+  --color-white-pure: #ffffff;
+
+  --bronze-500: var(--royal-gold);
+  --bronze-400: var(--royal-gold);
+  /* Use gold as main accent */
+  --bronze-300: #e0c294;
+
+  --gold-500: var(--royal-gold);
+  --gold-400: var(--royal-gold-dark);
+
+  --charcoal-900: var(--royal-ink);
+  --charcoal-800: var(--royal-ink);
+  --charcoal-700: #3e3b38;
+  --charcoal-600: #4a4744;
+  --charcoal-500: var(--royal-slate);
+  --charcoal-400: #888580;
+  --charcoal-300: #b0ada8;
+  --charcoal-200: var(--royal-pearl);
+  --charcoal-100: #f0ede6;
+
+  /* ---- Typography ---- */
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+
+  /* ---- Spacing Scale ---- */
+  --space-xs: 0.75rem;
+  --space-sm: 1.5rem;
+  --space-md: 3rem;
+  --space-lg: 6rem;
+  --space-xl: 9rem;
+
+  /* ---- Layout ---- */
+  --max-text-width: 60ch;
+
+  /* ---- Transitions ---- */
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-cut: cubic-bezier(0.77, 0, 0.175, 1);
+  /* Sharp transition for cuts */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
   margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--royal-white);
+  color: var(--royal-ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-a {
-  color: inherit;
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+════════════════════════════════════════════════════════════════ */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--royal-ink);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 3.5vw, 2.5rem);
+}
+
+p {
+  margin: 0;
+  max-width: var(--max-text-width);
+  color: var(--royal-slate);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   BUTTONS: "THE CUT" EFFECT
+════════════════════════════════════════════════════════════════ */
+.btn {
+  border-radius: 0;
+  font-weight: 500;
+  padding: 0.85rem 2rem;
+  transition: all 0.4s var(--transition-smooth);
   text-decoration: none;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+/* Royal Button with Cut Hover */
+.btn-royal {
+  background: var(--royal-ink);
+  color: var(--royal-white);
+  border: 1px solid var(--royal-ink);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  overflow: hidden;
+}
+
+/* The Cut Blades (Pseudo-elements) */
+.btn-royal::before,
+.btn-royal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--royal-gold);
+  z-index: -1;
+  transition: width 0.4s var(--transition-cut);
+  transform: skewX(-20deg);
+  /* The "Cut" Angle */
+}
+
+/* Left blade cuts in */
+.btn-royal::before {
+  left: -10%;
+  transform-origin: left;
+}
+
+/* Right blade cuts in */
+.btn-royal::after {
+  right: -10%;
+  transform-origin: right;
+  background: var(--royal-gold-dark);
+}
+
+/* Hover State: Blades meet in the middle */
+.btn-royal:hover::before {
+  width: 60%;
+}
+
+.btn-royal:hover::after {
+  width: 60%;
+}
+
+.btn-royal:hover {
+  color: var(--royal-white);
+  border-color: var(--royal-gold);
+  box-shadow: 0 10px 30px rgba(197, 160, 101, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Outline Royal Button */
+.btn-outline-royal {
+  background: transparent;
+  border: 1px solid var(--royal-ink);
+  color: var(--royal-ink);
+}
+
+.btn-outline-royal:hover {
+  background: var(--royal-ink);
+  color: var(--royal-white);
+}
+
+.btn-wood {
+  /* Mapped to royal style for compatibility */
+  background: var(--royal-gold);
+  color: var(--royal-white);
+  border: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Diagonal Cut Swipe on Hover */
+.btn-wood::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100px;
+  width: 40px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: skewX(-25deg);
+  transition: left 0.5s ease;
+}
+
+.btn-wood:hover::before {
+  left: 120%;
+  transition: left 0.5s ease;
+}
+
+.btn-wood:hover {
+  background: var(--royal-gold-dark);
+  box-shadow: 0 5px 15px rgba(197, 160, 101, 0.4);
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+   SECTIONS
+════════════════════════════════════════════════════════════════ */
+.section,
+.section-tight,
+.section-hero {
+  background-color: var(--royal-white);
+}
+
+.section {
+  padding-top: calc(var(--space-lg) + 1rem);
+  padding-bottom: calc(var(--space-lg) + 1rem);
+}
+
+.section-tight {
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-md);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   HERO SECTION (Light Royal Theme)
+════════════════════════════════════════════════════════════════ */
+.hero-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  /* Light Gradient Background */
+  background: linear-gradient(180deg,
+      var(--royal-white) 0%,
+      var(--royal-cream) 100%);
+}
+
+/* Subtle texture overlay */
+.hero-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 80% 20%, rgba(197, 160, 101, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 10% 80%, rgba(197, 160, 101, 0.1) 0%, transparent 40%);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--royal-ink);
+  margin-bottom: 2rem;
+}
+
+.hero-tagline .highlight {
+  color: var(--royal-gold);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hero-subtitle {
+  font-size: 1.35rem;
+  color: var(--royal-slate);
+  max-width: 550px;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+/* ════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════════════
+   STATS SECTION (Royal Stats)
+════════════════════════════════════════════════════════════════ */
+.section-dark {
+  background-color: var(--royal-ink);
+  color: var(--royal-white);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle Royal Pattern Overlay */
+.section-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(45deg, rgba(197, 160, 101, 0.05) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(197, 160, 101, 0.05) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(197, 160, 101, 0.05) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(197, 160, 101, 0.05) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 2rem;
+  border: 1px solid rgba(197, 160, 101, 0.2);
+  background: rgba(43, 41, 38, 0.4);
+  backdrop-filter: blur(5px);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
+}
+
+/* Sheen Cut Effect */
+.stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(197, 160, 101, 0.2),
+      transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+  z-index: 0;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--royal-gold);
+  background: rgba(43, 41, 38, 0.6);
+}
+
+.stat-card:hover::before {
+  left: 150%;
+  transition: left 0.7s ease;
+}
+
+/* Ensure content stays on top of sheen */
+.stat-card>* {
+  position: relative;
+  z-index: 1;
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  color: var(--royal-gold);
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.stat-num-royal {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--royal-gold) 0%, #fff 50%, var(--royal-gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.stat-label-royal {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--royal-pearl);
+  margin-top: 0.5rem;
+}
+
+
+/* ════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════════════════
+   SERVICE CARDS (Royal Edition)
+════════════════════════════════════════════════════════════════ */
+.service-card {
+  background: var(--color-white-pure);
+  border: 1px solid var(--royal-pearl);
+  padding: 3rem 2rem;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+/* Golden Top Accent Line */
+.service-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--royal-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+/* Sheen Effect for Light Card */
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(197, 160, 101, 0.15),
+      transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(166, 132, 77, 0.15);
+  /* Soft Gold Shadow */
+  border-color: var(--royal-gold);
+}
+
+.service-card:hover::after {
+  transform: scaleX(1);
+}
+
+.service-card:hover::before {
+  left: 150%;
+  transition: left 0.6s ease;
+}
+
+.service-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--royal-gold);
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.1);
+  color: var(--royal-gold-dark);
+}
+
+.service-card h4 {
+  margin-bottom: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  color: var(--royal-ink);
+}
+
+.service-card p {
+  color: var(--royal-slate);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PORTFOLIO
+════════════════════════════════════════════════════════════════ */
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-overlay {
+  background: rgba(43, 41, 38, 0.85);
+  /* Royal Ink with opacity */
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.4s ease;
+  padding: 2rem;
+  text-align: center;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+  opacity: 1;
+}
+
+.portfolio-overlay h4 {
+  color: var(--royal-white);
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay h4 {
+  transform: translateY(0);
+}
+
+.portfolio-overlay span {
+  color: var(--royal-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CTA SECTION
+════════════════════════════════════════════════════════════════ */
+.cta-section {
+  background: var(--royal-pearl);
+  padding: 6rem 0;
+  text-align: center;
+  color: var(--royal-ink);
+}
+
+.cta-section h2 {
+  color: var(--royal-ink);
+  font-family: var(--font-display);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════════════════════════ */
+footer {
+  background: var(--royal-ink) !important;
+  color: var(--royal-pearl) !important;
+  border-top: none !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   UTILITIES
+════════════════════════════════════════════════════════════════ */
+.divider-bronze {
+  width: 60px;
+  height: 3px;
+  background-color: var(--royal-gold);
+  margin: 1.5rem auto;
+}
+
+.text-gold {
+  color: var(--royal-gold);
+}
+
+/* Quote Card */
+.quote-card {
+  background: var(--royal-white);
+  padding: 3rem;
+  border-left: 4px solid var(--royal-gold);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.03);
+}
+
+/* Animations */
+[data-motion] {
+  will-change: transform, opacity;
+}
+
+main {
+  padding-top: 80px;
 }
