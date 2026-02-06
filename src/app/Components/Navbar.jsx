@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -37,7 +38,7 @@ export default function Navbar() {
         zIndex: 1000,
         transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         background: scrolled
-          ? 'rgba(26, 26, 26, 0.98)'
+          ? 'rgba(255, 255, 255, 0.98)'
           : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
         borderBottom: scrolled
@@ -53,7 +54,7 @@ export default function Navbar() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          padding: scrolled ? '0.75rem 0' : '1.25rem 0',
+          padding: scrolled ? '0.5rem 0' : '0.75rem 0',
           transition: 'padding 0.4s ease',
         }}>
 
@@ -64,31 +65,27 @@ export default function Navbar() {
               textDecoration: 'none',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.75rem',
+              gap: '0',
+              marginLeft: '-55px'
             }}
           >
             {/* Logo Mark */}
             <div style={{
-              width: '42px',
-              height: '42px',
-              background: 'linear-gradient(135deg, var(--bronze-500), var(--bronze-400))',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              width: '100px',
+              height: '100px',
               position: 'relative',
             }}>
-              <span style={{
-                color: 'var(--charcoal-900)',
-                fontWeight: '700',
-                fontSize: '1.1rem',
-                fontFamily: 'var(--font-display)',
-              }}>
-                C&G
-              </span>
+              <Image
+                src="/images/logo.png"
+                alt="Cuts & Grooves Logo"
+                fill
+                style={{ objectFit: 'contain' }}
+                priority
+              />
             </div>
 
             {/* Logo Text */}
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '-35px' }}>
               <span style={{
                 color: 'var(--royal-ink)',
                 fontWeight: '600',
@@ -105,7 +102,7 @@ export default function Navbar() {
                 letterSpacing: '0.15em',
                 marginTop: '2px',
               }}>
-                Interior & Construction
+                AN ARCHITECTURE FIRM
               </span>
             </div>
           </Link>

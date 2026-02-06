@@ -24,6 +24,12 @@
   --royal-slate: #5e5b56;
   /* Secondary Text */
 
+  /* ---- Logo Colors ---- */
+  --logo-blue: #0d2c6e;
+  --logo-orange: #e88d2a;
+  --logo-red: #d41c1c;
+  --logo-gold: #f0c43f;
+
   /* ---- Mapped Variables (for compatibility) ---- */
   --warm-white: var(--royal-white);
   --ivory: var(--royal-cream);
@@ -329,13 +335,9 @@ p {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(45deg, rgba(197, 160, 101, 0.05) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(197, 160, 101, 0.05) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(197, 160, 101, 0.05) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(197, 160, 101, 0.05) 75%);
-  background-size: 40px 40px;
-  background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
-  opacity: 0.3;
+    radial-gradient(circle at center, rgba(197, 160, 101, 0.08) 0%, transparent 70%);
+  background-size: cover;
+  opacity: 1;
   pointer-events: none;
 }
 
