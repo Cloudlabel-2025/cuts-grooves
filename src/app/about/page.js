@@ -1,4 +1,4 @@
-import FadeIn from '../components/FadeIn'
+import FadeIn from '../Components/FadeIn'
 
 export default function AboutPage() {
   return (

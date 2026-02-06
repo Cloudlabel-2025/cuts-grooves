@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import FadeIn from '../../components/FadeIn'
+import FadeIn from '../../Components/FadeIn'
 
 export default function ProjectDetail({ params }) {
   const slug = params?.slug ?? 'project'
