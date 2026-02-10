@@ -86,8 +86,8 @@ html {
 body {
   margin: 0;
   font-family: var(--font-body);
-  background-color: var(--royal-white);
-  color: var(--royal-ink);
+  background-color: #000;
+  color: #fff;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -609,5 +609,5 @@ footer {
 }
 
 main {
-  padding-top: 80px;
+  padding-top: 0;
 }
